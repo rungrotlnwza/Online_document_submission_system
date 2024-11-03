@@ -9,47 +9,6 @@ if (isset($_SESSION['user_id'])) {
 
 // กำหนดค่าตัวแปรสำหรับข้อความแสดงผล
 $message = '';
-
-// ตรวจสอบการส่งฟอร์มการลงทะเบียน
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // รับข้อมูลจากฟอร์ม
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $name = $_POST['name'];
-
-    // TODO: ตรวจสอบข้อมูลในฐานข้อมูล (เช่น ชื่อผู้ใช้ซ้ำ) และบันทึกผู้ใช้ใหม่
-    // ตัวอย่างการเชื่อมต่อฐานข้อมูล
-    // $conn = new mysqli('localhost', 'username', 'password', 'database');
-
-    // ตรวจสอบการเชื่อมต่อ
-    // if ($conn->connect_error) {
-    //     die("Connection failed: " . $conn->connect_error);
-    // }
-
-    // ตัวอย่างการตรวจสอบชื่อผู้ใช้ซ้ำ (ควรทำในฐานข้อมูลจริง)
-    // $sql = "SELECT * FROM users WHERE username = '$username'";
-    // $result = $conn->query($sql);
-    // if ($result->num_rows > 0) {
-    //     $message = "ชื่อผู้ใช้ซ้ำ กรุณาใช้ชื่ออื่น";
-    // } else {
-    //     // แฮชรหัสผ่านก่อนบันทึก
-    //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    //     // บันทึกผู้ใช้ใหม่
-    //     $sql = "INSERT INTO users (username, password, name) VALUES ('$username', '$hashed_password', '$name')";
-    //     if ($conn->query($sql) === TRUE) {
-    //         $message = "ลงทะเบียนสำเร็จ! คุณสามารถเข้าสู่ระบบได้เลย";
-    //     } else {
-    //         $message = "เกิดข้อผิดพลาดในการลงทะเบียน: " . $conn->error;
-    //     }
-    // }
-
-    // ปิดการเชื่อมต่อฐานข้อมูล
-    // $conn->close();
-
-    // สำหรับการทดสอบเราจะสมมุติว่าลงทะเบียนสำเร็จ
-    $message = "ลงทะเบียนสำเร็จ! คุณสามารถเข้าสู่ระบบได้เลย";
-}
 ?>
 
 <!DOCTYPE html>

@@ -10,28 +10,24 @@ if (isset($_SESSION['user_id'])) {
 // กำหนดค่าตัวแปรสำหรับข้อความแสดงผล
 $message = '';
 
-// ตรวจสอบการส่งฟอร์มเข้าสู่ระบบ
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // รับข้อมูลจากฟอร์ม
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    // TODO: ตรวจสอบข้อมูลผู้ใช้ในฐานข้อมูล
-    // นี่คือตัวอย่างการตั้งค่า (ควรเชื่อมต่อกับฐานข้อมูลจริง)
-    $stored_username = 'admin'; // ตัวอย่างชื่อผู้ใช้
-    $stored_password = 'password'; // ตัวอย่างรหัสผ่าน
+// เชื่อมต่อกับฐานข้อมูล (ปรับข้อมูลการเชื่อมต่อตามที่คุณใช้งาน)
+$host = 'localhost'; // ที่อยู่ฐานข้อมูล
+$db = 'document_system'; // ชื่อฐานข้อมูล
+$user = 'root'; // ชื่อผู้ใช้ฐานข้อมูล
+$pass = ''; // รหัสผ่านฐานข้อมูล
 
-    if ($username === $stored_username && $password === $stored_password) {
-        // หากข้อมูลถูกต้องให้ตั้งค่า session
-        $_SESSION['user_id'] = 1; // ตัวอย่าง ID ผู้ใช้
-        $_SESSION['username'] = $username;
-        $_SESSION['is_admin'] = true; // กำหนดให้เป็นแอดมิน
-        header("Location: dashboard.php");
-        exit();
-    } else {
-        $message = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
-    }
+// สร้างการเชื่อมต่อ
+$conn = new mysqli($host, $user, $pass, $db);
+
+// ตรวจสอบการเชื่อมต่อ
+if ($conn->connect_error) {
+    die("การเชื่อมต่อฐานข้อมูลล้มเหลว: " . $conn->connect_error);
 }
+
+$message = '';
+
+
 ?>
 
 <!DOCTYPE html>

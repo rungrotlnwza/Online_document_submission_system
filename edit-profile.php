@@ -11,23 +11,6 @@ if (!$isLoggedIn) {
     exit();
 }
 
-// เช็คว่ามีการส่งข้อมูลจากฟอร์มหรือไม่
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // รหัสผ่านใหม่และชื่อผู้ใช้
-    $newPassword = $_POST['new_password'] ?? '';
-    $newUsername = $_POST['username'] ?? '';
-
-    // สมมุติว่าเราได้เชื่อมต่อกับฐานข้อมูลและอัปเดตข้อมูลเรียบร้อย
-    // ให้แทนที่โค้ดนี้ด้วยการอัปเดตข้อมูลในฐานข้อมูลจริง
-    // $userId = $_SESSION['user_id'];
-    // updateUserProfile($userId, $newUsername, $newPassword); // ฟังก์ชันที่คุณสร้างขึ้นสำหรับอัปเดตข้อมูล
-
-    // อัปเดตเซสชัน
-    $_SESSION['username'] = $newUsername; // อัปเดตชื่อผู้ใช้ในเซสชัน
-
-    // แสดงข้อความแจ้งเตือน
-    $message = "ข้อมูลส่วนตัวได้ถูกอัปเดตเรียบร้อยแล้ว!";
-}
 ?>
 
 <!DOCTYPE html>

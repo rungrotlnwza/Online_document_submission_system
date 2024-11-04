@@ -1,15 +1,3 @@
-<?php
-session_start();
-
-// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบอยู่แล้ว ถ้าใช่ให้ส่งไปยังหน้า dashboard.php
-if (isset($_SESSION['user_id'])) {
-    header("Location: dashboard.php");
-    exit();
-}
-
-// กำหนดค่าตัวแปรสำหรับข้อความแสดงผล
-$message = '';
-?>
 
 <!DOCTYPE html>
 <html lang="th">
@@ -89,9 +77,9 @@ $message = '';
 
     <div class="content">
         <h1>ลงทะเบียน</h1>
-        <?php if ($message): ?>
-            <div class="success-message"><?php echo htmlspecialchars($message); ?></div>
-        <?php endif; ?>
+        
+            <div class="success-message">message</div>
+        
         <form action="register.php" method="post">
             <div class="form-group">
                 <label for="username">ชื่อผู้ใช้</label>

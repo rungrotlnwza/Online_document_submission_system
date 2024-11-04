@@ -1,34 +1,3 @@
-<?php
-session_start();
-
-// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบอยู่แล้ว ถ้าใช่ให้ส่งไปยังหน้า dashboard.php
-if (isset($_SESSION['user_id'])) {
-    header("Location: dashboard.php");
-    exit();
-}
-
-// กำหนดค่าตัวแปรสำหรับข้อความแสดงผล
-$message = '';
-
-
-// เชื่อมต่อกับฐานข้อมูล (ปรับข้อมูลการเชื่อมต่อตามที่คุณใช้งาน)
-$host = 'localhost'; // ที่อยู่ฐานข้อมูล
-$db = 'document_system'; // ชื่อฐานข้อมูล
-$user = 'root'; // ชื่อผู้ใช้ฐานข้อมูล
-$pass = ''; // รหัสผ่านฐานข้อมูล
-
-// สร้างการเชื่อมต่อ
-$conn = new mysqli($host, $user, $pass, $db);
-
-// ตรวจสอบการเชื่อมต่อ
-if ($conn->connect_error) {
-    die("การเชื่อมต่อฐานข้อมูลล้มเหลว: " . $conn->connect_error);
-}
-
-$message = '';
-
-
-?>
 
 <!DOCTYPE html>
 <html lang="th">
@@ -103,9 +72,9 @@ $message = '';
 
     <div class="content">
         <h1>เข้าสู่ระบบ</h1>
-        <?php if ($message): ?>
-            <div class="error-message"><?php echo htmlspecialchars($message); ?></div>
-        <?php endif; ?>
+       
+            <div class="error-message">message</div>
+        
         <form action="login.php" method="post">
             <div class="form-group">
                 <label for="username">ชื่อผู้ใช้</label>

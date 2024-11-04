@@ -1,36 +1,3 @@
-<?php
-session_start();
-
-// ตรวจสอบสถานะการเข้าสู่ระบบ
-$isLoggedIn = isset($_SESSION['user_id']); // ตรวจสอบการเข้าสู่ระบบ
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; // แสดงชื่อผู้ใช้หากเข้าสู่ระบบแล้ว
-
-// ถ้ายังไม่ล็อกอิน ให้เด้งไปหน้า login.php
-if (!$isLoggedIn) {
-    header("Location: login.php");
-    exit();
-}
-
-// ตัวอย่างการดึงข้อมูลเอกสารจากฐานข้อมูล (แทนที่ด้วยการเชื่อมต่อฐานข้อมูลจริง)
-$documents = [
-    [
-        'id' => 1,
-        'name' => 'เอกสาร A',
-        'description' => 'รายละเอียดเอกสาร A',
-        'type' => 'PDF',
-        'uploaded_by' => $_SESSION['username']
-    ],
-    [
-        'id' => 2,
-        'name' => 'เอกสาร B',
-        'description' => 'รายละเอียดเอกสาร B',
-        'type' => 'DOCX',
-        'uploaded_by' => $_SESSION['username']
-    ],
-    // เพิ่มเอกสารเพิ่มเติมตามต้องการ
-];
-
-?>
 
 <!DOCTYPE html>
 <html lang="th">
@@ -150,7 +117,7 @@ $documents = [
             <a href="index.php">หน้าแรก</a>
             <a href="upload.php">อัปโหลดเอกสาร</a>
 
-            <?php if ($isLoggedIn): ?>
+            
                 <div class="dropdown">
                     <a href="dashboard.php">แดชบอร์ด</a>
                     <div class="dropdown-content">
@@ -159,9 +126,7 @@ $documents = [
                         <a href="user-documents.php">เอกสารของฉัน</a>
                     </div>
                 </div>
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+            
                 <div class="dropdown">
                     <a href="admin-dashboard.php">แดชบอร์ดแอดมิน</a>
                     <div class="dropdown-content">
@@ -169,16 +134,16 @@ $documents = [
                         <a href="manage-documents.php">จัดการเอกสาร</a>
                     </div>
                 </div>
-            <?php endif; ?>
+            
         </div>
         <div>
-            <?php if ($isLoggedIn): ?>
-                <span>สวัสดี, <?php echo htmlspecialchars($username); ?></span>
+            
+                <span>สวัสดี, username</span>
                 <a href="logout.php">ออกจากระบบ</a>
-            <?php else: ?>
+            
                 <a href="login.php">เข้าสู่ระบบ</a>
                 <a href="register.php">ลงทะเบียน</a>
-            <?php endif; ?>
+            
         </div>
     </nav>
 
@@ -186,21 +151,19 @@ $documents = [
     <div class="content">
         <h1>เอกสารของฉัน</h1>
 
-        <?php if (count($documents) > 0): ?>
-            <?php foreach ($documents as $document): ?>
+        
                 <div class="document-card">
-                    <h3><?php echo htmlspecialchars($document['name']); ?></h3>
-                    <p>รายละเอียด: <?php echo htmlspecialchars($document['description']); ?></p>
-                    <p>ประเภท: <?php echo htmlspecialchars($document['type']); ?></p>
-                    <p>อัปโหลดโดย: <?php echo htmlspecialchars($document['uploaded_by']); ?></p>
-                    <a href="view-document.php?id=<?php echo $document['id']; ?>" class="button">ดูเอกสาร</a>
-                    <a href="delete-document.php?id=<?php echo $document['id']; ?>" class="button">ลบเอกสาร</a>
-                    <a href="hide-document.php?id=<?php echo $document['id']; ?>" class="button">ซ่อนเอกสาร</a>
+                    <h3>name</h3>
+                    <p>รายละเอียด: description</p>
+                    <p>ประเภท: type</p>
+                    <p>อัปโหลดโดย: upload by</p>
+                    <a href="view-document.php" class="button">ดูเอกสาร</a>
+                    <a href="delete-document.php" class="button">ลบเอกสาร</a>
+                    <a href="hide-document.php" class="button">ซ่อนเอกสาร</a>
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
+            
             <p>ยังไม่มีเอกสารที่อัปโหลด</p>
-        <?php endif; ?>
+        
     </div>
 
 </body>

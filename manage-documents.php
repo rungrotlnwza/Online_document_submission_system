@@ -1,25 +1,3 @@
-<?php
-session_start();
-
-// ตรวจสอบสถานะการเข้าสู่ระบบ
-$isLoggedIn = isset($_SESSION['user_id']); // ตรวจสอบการเข้าสู่ระบบ
-$isAdmin = isset($_SESSION['is_admin']) ? $_SESSION['is_admin'] : false; // ตรวจสอบว่าผู้ใช้เป็นแอดมินหรือไม่
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; // แสดงชื่อผู้ใช้หากเข้าสู่ระบบแล้ว
-
-// ถ้ายังไม่ล็อกอิน หรือไม่ใช่แอดมิน ให้เด้งไปหน้า login.php
-if (!$isLoggedIn || !$isAdmin) {
-    header("Location: login.php");
-    exit();
-}
-
-// ข้อมูลตัวอย่างสำหรับเอกสาร (ควรแทนที่ด้วยการดึงข้อมูลจริงจากฐานข้อมูล)
-$documents = [
-    ['id' => 1, 'name' => 'Document 1', 'description' => 'Description of document 1', 'type' => 'pdf'],
-    ['id' => 2, 'name' => 'Document 2', 'description' => 'Description of document 2', 'type' => 'docx'],
-    ['id' => 3, 'name' => 'Document 3', 'description' => 'Description of document 3', 'type' => 'png'],
-];
-
-?>
 
 <!DOCTYPE html>
 <html lang="th">
@@ -110,7 +88,7 @@ $documents = [
             <a href="index.php">หน้าแรก</a>
             <a href="upload.php">อัปโหลดเอกสาร</a>
 
-            <?php if ($isLoggedIn): ?>
+            
             <div class="dropdown">
                 <a href="dashboard.php">แดชบอร์ด</a>
                 <div class="dropdown-content">
@@ -119,9 +97,7 @@ $documents = [
                     <a href="user-documents.php">เอกสารของฉัน</a>
                 </div>
             </div>
-            <?php endif; ?>
-
-            <?php if ($isAdmin): ?>
+            
             <div class="dropdown">
                 <a href="admin-dashboard.php">แดชบอร์ดแอดมิน</a>
                 <div class="dropdown-content">
@@ -129,16 +105,15 @@ $documents = [
                     <a href="manage-documents.php">จัดการเอกสาร</a>
                 </div>
             </div>
-            <?php endif; ?>
+            
         </div>
         <div>
-            <?php if ($isLoggedIn): ?>
-            <span>สวัสดี, <?php echo htmlspecialchars($username); ?></span>
+        
+            <span>สวัสดี, message</span>
             <a href="logout.php">ออกจากระบบ</a>
-            <?php else: ?>
+            
             <a href="login.php">เข้าสู่ระบบ</a>
             <a href="register.php">ลงทะเบียน</a>
-            <?php endif; ?>
         </div>
     </nav>
 
@@ -154,18 +129,18 @@ $documents = [
                 <th>ประเภท</th>
                 <th>จัดการ</th>
             </tr>
-            <?php foreach ($documents as $document): ?>
+            
                 <tr>
-                    <td><?php echo htmlspecialchars($document['id']); ?></td>
-                    <td><?php echo htmlspecialchars($document['name']); ?></td>
-                    <td><?php echo htmlspecialchars($document['description']); ?></td>
-                    <td><?php echo htmlspecialchars($document['type']); ?></td>
+                    <td>id</td>
+                    <td>name</td>
+                    <td>discription</td>
+                    <td>type</td>
                     <td>
-                        <a href="edit-document.php?id=<?php echo $document['id']; ?>" class="button">แก้ไข</a>
-                        <a href="delete-document.php?id=<?php echo $document['id']; ?>" class="button">ลบ</a>
+                        <a href="edit-document.php" class="button">แก้ไข</a>
+                        <a href="delete-document.php" class="button">ลบ</a>
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            
         </table>
     </div>
 

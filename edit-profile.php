@@ -1,17 +1,4 @@
-<?php
-session_start();
 
-// ตรวจสอบสถานะการเข้าสู่ระบบ
-$isLoggedIn = isset($_SESSION['user_id']); // ตรวจสอบการเข้าสู่ระบบ
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; // แสดงชื่อผู้ใช้หากเข้าสู่ระบบแล้ว
-
-// ถ้ายังไม่ล็อกอิน ให้เด้งไปหน้า login.php
-if (!$isLoggedIn) {
-    header("Location: login.php");
-    exit();
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="th">
@@ -139,7 +126,7 @@ if (!$isLoggedIn) {
             <a href="index.php">หน้าแรก</a>
             <a href="upload.php">อัปโหลดเอกสาร</a>
 
-            <?php if ($isLoggedIn): ?>
+            
                 <div class="dropdown">
                     <a href="dashboard.php">แดชบอร์ด</a>
                     <div class="dropdown-content">
@@ -148,26 +135,23 @@ if (!$isLoggedIn) {
                         <a href="user-documents.php">เอกสารของฉัน</a>
                     </div>
                 </div>
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
-                <div class="dropdown">
+                            <div class="dropdown">
                     <a href="admin-dashboard.php">แดชบอร์ดแอดมิน</a>
                     <div class="dropdown-content">
                         <a href="manage-users.php">จัดการผู้ใช้</a>
                         <a href="manage-documents.php">จัดการเอกสาร</a>
                     </div>
                 </div>
-            <?php endif; ?>
+            
         </div>
         <div>
-            <?php if ($isLoggedIn): ?>
+           
                 <span>สวัสดี, <?php echo htmlspecialchars($username); ?></span>
                 <a href="logout.php">ออกจากระบบ</a>
-            <?php else: ?>
+           
                 <a href="login.php">เข้าสู่ระบบ</a>
                 <a href="register.php">ลงทะเบียน</a>
-            <?php endif; ?>
+            
         </div>
     </nav>
 
@@ -175,14 +159,14 @@ if (!$isLoggedIn) {
     <div class="content">
         <h1>แก้ไขข้อมูลส่วนตัว</h1>
 
-        <?php if (isset($message)): ?>
-            <div class="message"><?php echo htmlspecialchars($message); ?></div>
-        <?php endif; ?>
+       
+            <div class="message">message</div>
+        
 
         <form action="edit-profile.php" method="post">
             <div class="form-group">
                 <label for="username">ชื่อผู้ใช้</label>
-                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required>
+                <input type="text" id="username" name="username" value="username" required>
             </div>
 
             <div class="form-group">

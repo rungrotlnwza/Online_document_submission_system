@@ -1,24 +1,3 @@
-<?php
-session_start();
-
-// ตรวจสอบสถานะการเข้าสู่ระบบ
-$isLoggedIn = isset($_SESSION['user_id']); // ตรวจสอบการเข้าสู่ระบบ
-$isAdmin = isset($_SESSION['is_admin']) ? $_SESSION['is_admin'] : false; // ตรวจสอบว่าผู้ใช้เป็นแอดมินหรือไม่
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; // แสดงชื่อผู้ใช้หากเข้าสู่ระบบแล้ว
-
-// ถ้ายังไม่ล็อกอิน หรือไม่ใช่แอดมิน ให้เด้งไปหน้า login.php
-if (!$isLoggedIn || !$isAdmin) {
-    header("Location: login.php");
-    exit();
-}
-
-// ข้อมูลตัวอย่างสำหรับผู้ใช้ (ควรแทนที่ด้วยการดึงข้อมูลจริงจากฐานข้อมูล)
-$users = [
-    ['id' => 1, 'username' => 'user1', 'email' => 'user1@example.com', 'role' => 'User'],
-    ['id' => 2, 'username' => 'admin', 'email' => 'admin@example.com', 'role' => 'Admin'],
-];
-
-?>
 
 <!DOCTYPE html>
 <html lang="th">
@@ -109,7 +88,7 @@ $users = [
                 <a href="index.php">หน้าแรก</a>
                 <a href="upload.php">อัปโหลดเอกสาร</a>
 
-                <?php if ($isLoggedIn): ?>
+                
                 <div class="dropdown">
                     <a href="dashboard.php">แดชบอร์ด</a>
                     <div class="dropdown-content">
@@ -118,26 +97,23 @@ $users = [
                         <a href="user-documents.php">เอกสารของฉัน</a>
                     </div>
                 </div>
-                <?php endif; ?>
-
-                <?php if ($isAdmin): ?>
-                <div class="dropdown">
+                     <div class="dropdown">
                     <a href="admin-dashboard.php">แดชบอร์ดแอดมิน</a>
                     <div class="dropdown-content">
                         <a href="manage-users.php">จัดการผู้ใช้</a>
                         <a href="manage-documents.php">จัดการเอกสาร</a>
                     </div>
                 </div>
-                <?php endif; ?>
+                
             </div>
             <div>
-                <?php if ($isLoggedIn): ?>
-                <span>สวัสดี, <?php echo htmlspecialchars($username); ?></span>
+                
+                <span>สวัสดี, username</span>
                 <a href="logout.php">ออกจากระบบ</a>
-                <?php else: ?>
+                
                 <a href="login.php">เข้าสู่ระบบ</a>
                 <a href="register.php">ลงทะเบียน</a>
-                <?php endif; ?>
+                
             </div>
         </nav>
 
@@ -155,13 +131,13 @@ $users = [
             </tr>
             <?php foreach ($users as $user): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($user['id']); ?></td>
-                    <td><?php echo htmlspecialchars($user['username']); ?></td>
-                    <td><?php echo htmlspecialchars($user['email']); ?></td>
-                    <td><?php echo htmlspecialchars($user['role']); ?></td>
+                    <td>id</td>
+                    <td>username</td>
+                    <td>email</td>
+                    <td>role</td>
                     <td>
-                        <a href="edit-user.php?id=<?php echo $user['id']; ?>" class="button">แก้ไข</a>
-                        <a href="delete-user.php?id=<?php echo $user['id']; ?>" class="button">ลบ</a>
+                        <a href="edit-user.php" class="button">แก้ไข</a>
+                        <a href="delete-user.php" class="button">ลบ</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

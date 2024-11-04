@@ -1,17 +1,3 @@
-<?php
-session_start();
-
-// ตรวจสอบการเข้าสู่ระบบ
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
-// ตรวจสอบสถานะการเข้าสู่ระบบ
-$isLoggedIn = isset($_SESSION['user_id']); // ตรวจสอบการเข้าสู่ระบบ
-$isAdmin = isset($_SESSION['is_admin']) ? $_SESSION['is_admin'] : false; // ตรวจสอบว่าผู้ใช้เป็นแอดมินหรือไม่
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; // แสดงชื่อผู้ใช้หากเข้าสู่ระบบแล้ว
-
-?>
 
 <!DOCTYPE html>
 <html lang="th">
@@ -136,7 +122,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; // �
             <a href="index.php">หน้าแรก</a>
             <a href="upload.php">อัปโหลดเอกสาร</a>
 
-            <?php if ($isLoggedIn): ?>
+            
             <div class="dropdown">
                 <a href="dashboard.php">แดชบอร์ด</a>
                 <div class="dropdown-content">
@@ -145,9 +131,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; // �
                     <a href="user-documents.php">เอกสารของฉัน</a>
                 </div>
             </div>
-            <?php endif; ?>
-
-            <?php if ($isAdmin): ?>
+            
             <div class="dropdown">
                 <a href="admin-dashboard.php">แดชบอร์ดแอดมิน</a>
                 <div class="dropdown-content">
@@ -155,16 +139,16 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; // �
                     <a href="manage-documents.php">จัดการเอกสาร</a>
                 </div>
             </div>
-            <?php endif; ?>
+            
         </div>
         <div>
-            <?php if ($isLoggedIn): ?>
-            <span>สวัสดี, <?php echo htmlspecialchars($username); ?></span>
+            
+            <span>สวัสดี, username</span>
             <a href="logout.php">ออกจากระบบ</a>
-            <?php else: ?>
+            
             <a href="login.php">เข้าสู่ระบบ</a>
             <a href="register.php">ลงทะเบียน</a>
-            <?php endif; ?>
+            
         </div>
     </nav>
 
